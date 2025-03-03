@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stacked Cards</title>
+    <!--Google Fonts-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <div class="stack-area">
+        <div class="left">
+            <div class="title">Mohit Janotiya</div>
+            <div class="sub-title">
+                A Computer Science Engineer who build this website.
+                <br />
+                <button>See More Details</button>
+            </div>
+        </div>
+        <div class="right">
+            <div class="card">
+                <div class="sub">Skills</div>
+                <div class="content">Skills me kya rakha h "dil saf hona chahiye"</div>
+            </div>
+            <div class="card">
+                <div class="sub">Video Editor</div>
+                <div class="content">A porfessional video editor </div>
+            </div>
+            <div class="card">
+                <div class="sub">Gym Freak</div>
+                <div class="content">Trains 5 times a week</div>
+            </div>
+            <div class="card">
+                <div class="sub">Ui Ux Developer </div>
+                <div class="content">Now its 24/7 work</div>
+            </div>
+            <div class="card">
+                <div class="sub">BAS BHAI </div>
+                <div class="content">Ab kya likhta hi rhu</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cards = document.querySelectorAll(".card");
+
+        let stackArea = document.querySelector(".stack-area");
+
+        function rotateCards() {
+            let angle = 0;
+            cards.forEach((card, index) => {
+                if (card.classList.contains("away")) {
+                    card.style.transform = `translateY(-120vh) rotate(-48deg)`;
+                } else {
+                    card.style.transform = ` rotate(${angle}deg)`;
+                    angle = angle - 10;
+                    card.style.zIndex = cards.length - index;
+                }
+            });
+        }
+
+        rotateCards();
+
+        window.addEventListener("scroll", () => {
+            let distance = window.innerHeight * 0.5;
+
+            let topVal = stackArea.getBoundingClientRect().top;
+
+            let index = -1 * (topVal / distance + 1);
+
+            index = Math.floor(index);
+
+            for (i = 0; i < cards.length; i++) {
+                if (i <= index) {
+                    cards[i].classList.add("away");
+                } else {
+                    cards[i].classList.remove("away");
+                }
+            }
+            rotateCards();
+        });
+    </script>
+</body>
+
+</html>
